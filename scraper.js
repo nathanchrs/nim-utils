@@ -1,6 +1,7 @@
 "use strict";
 
 const Bluebird = require('bluebird');
+const retry = require('bluebird-retry');
 const request = require('request');
 const cheerio = require('cheerio');
 const config = require('./config.json');
@@ -20,7 +21,10 @@ function scrapeStudents() {
     }
   }
 
-  return Bluebird.map(nimQueue, scrapeStudent, { concurrency: config.scraper.maxConcurrentRequests })
+  return Bluebird.map(nimQueue, (nim) => {
+      return retry(scrapeStudent, { max_tries: 3, args: [nim] })
+        .catch(err => { if (config.verbose) console.log('Error ignored for NIM ' + nim + ': ' + err); });
+    }, { concurrency: config.scraper.maxConcurrentRequests })
     .filter(studentData => studentData != null && studentData != undefined && studentData.nim !== '');
 }
 
