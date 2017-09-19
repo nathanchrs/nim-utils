@@ -1,0 +1,33 @@
+{
+  "name": "nim-utils",
+  "version": "0.1.0",
+  "description": "Utilities for obtaining public ITB student data",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nathanchrs/nim-utils.git"
+  },
+  "keywords": [
+    "nim",
+    "itb"
+  ],
+  "author": "nathanchrs",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nathanchrs/nim-utils/issues"
+  },
+  "homepage": "https://github.com/nathanchrs/nim-utils#readme",
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "cheerio": "^1.0.0-rc.2",
+    "dotenv": "^4.0.0",
+    "json2csv": "^3.11.2",
+    "request": "^2.81.0"
+  },
+  "devDependencies": {
+    "request-debug": "^0.2.0"
+  }
+}

@@ -1,3 +1,12 @@
+# Configuration files
+config.json
+
+# Default result file
+students.csv
+
+# System files
+.~lock.*
+
 # Logs
 logs
 *.log
