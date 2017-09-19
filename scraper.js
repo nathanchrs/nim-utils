@@ -20,10 +20,13 @@ function scrapeStudents() {
     }
   }
 
-  return Bluebird.map(nimQueue, scrapeStudent, { concurrency: config.scraper.maxConcurrentRequests });
+  return Bluebird.map(nimQueue, scrapeStudent, { concurrency: config.scraper.maxConcurrentRequests })
+    .filter(studentData => studentData != null && studentData != undefined && studentData.nim !== '');
 }
 
 function scrapeStudent(nim) {
+  if (config.verbose) console.log('Scraping NIM ' + nim + '...');
+
   return new Promise((resolve, reject) => {
 
     const requestOptions = {
@@ -67,6 +70,7 @@ function scrapeStudent(nim) {
         return reject(err);
       }
 
+      if (config.verbose) console.log('Received data for NIM ' + nim);
       return resolve(studentData);
     });
   });
